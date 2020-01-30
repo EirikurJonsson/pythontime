@@ -62,3 +62,4 @@ def roll250(df, x, y):
     plt.show()
     del ma50
     del ma200
+
