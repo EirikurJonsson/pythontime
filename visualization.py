@@ -37,15 +37,23 @@ def rollave(df, x, y, roll, title = ""):
     TODO. Should use a for loop to plot the new values created
     '''
     if isinstance(roll, list):
-        for i in roll:
-            df[f"ma{i}"] = df[x].rolling(window = i, min_periods = 0).mean()
+        for i in (roll):
+            df[f"ma{i}"] = df[y].rolling(window = i, min_periods = 0).mean()
+            plt.plot(df[x], df[f"ma{i}"])
+        
+        plt.figure(figsize = (16,5), dpi = 100)
+        plt.plot(df[x], df[y], color = "tab:red")
+        plt.gca().set(title = "Moving averages", xlabel = x, ylabel = y)
+    
     else:
-        df[f"ma{roll}"] = df[x].rolling(window = i, min_periods = 0).mean()
-    plt.figure(figsize = (16,5), dpi = 100)
-    plt.plot(x, y, color = "tab:red")
-    plt.plot(x,df[f"ma{roll}"], color = "blue")
-    plt.gca().set(title = "Moving averages", xlabel = x, ylabel = y)
+        df[f"ma{roll}"] = df[y].rolling(window = roll, min_periods = 0).mean()
+        plt.plot(df[x], df[f"ma{roll}"])
+        plt.figure(figsize = (16,5), dpi = 100)
+        plt.plot(df[x], df[y], color = "tab:red")
+        plt.gca().set(title = "Moving averages", xlabel = x, ylabel = y)
     plt.show()
+a = [50,90,200]
+rollave(df= df, x = "Date", y = "Adj Close", roll = a)
 
 def roll250(df, x, y):
     '''
