@@ -26,34 +26,30 @@ def plot_df(df, x, y, title = "", xlabel = "Date", ylabel = "Value", dpi = 100):
     plt.gca().set(title = title, xlabel = xlabel, ylabel = ylabel)
     plt.show()
 
-#plot_df(df, y = df["Adj Close"], x = df["Date"], title = "Adj Close")
-
 
 def rollave(df, x, y, roll, title = ""):
     '''
     This function is meant to take in either a value or a list of values
     that will represent the moving average window. Still does not work
-    TODO. Make sure that the if else statements work
-    TODO. Should use a for loop to plot the new values created
+    TODO. Get the lines on the same plot
     '''
     if isinstance(roll, list):
+        plt.figure(figsize = (16,5), dpi = 100)
+        plt.plot(df[x], df[y], color = "tab:red", label = y)
+        plt.gca().set(title = "Moving averages", xlabel = x, ylabel = y)
         for i in (roll):
             df[f"ma{i}"] = df[y].rolling(window = i, min_periods = 0).mean()
-            plt.plot(df[x], df[f"ma{i}"])
-        
-        plt.figure(figsize = (16,5), dpi = 100)
-        plt.plot(df[x], df[y], color = "tab:red")
-        plt.gca().set(title = "Moving averages", xlabel = x, ylabel = y)
+            plt.plot(df[x], df[f"ma{i}"], label = df[f"ma{i}"].name)   
     
     else:
         df[f"ma{roll}"] = df[y].rolling(window = roll, min_periods = 0).mean()
-        plt.plot(df[x], df[f"ma{roll}"])
+        plt.plot(df[x], df[f"ma{roll}"], label = df[f"ma{roll}"].name)
         plt.figure(figsize = (16,5), dpi = 100)
         plt.plot(df[x], df[y], color = "tab:red")
         plt.gca().set(title = "Moving averages", xlabel = x, ylabel = y)
+    plt.legend()
     plt.show()
-a = [50,90,200]
-rollave(df= df, x = "Date", y = "Adj Close", roll = a)
+
 
 def roll250(df, x, y):
     '''
@@ -70,4 +66,3 @@ def roll250(df, x, y):
     plt.show()
     del ma50
     del ma200
-
