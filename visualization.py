@@ -43,13 +43,14 @@ def rollave(df, x, y, roll, title = ""):
     
     else:
         df[f"ma{roll}"] = df[y].rolling(window = roll, min_periods = 0).mean()
-        plt.plot(df[x], df[f"ma{roll}"], label = df[f"ma{roll}"].name)
         plt.figure(figsize = (16,5), dpi = 100)
-        plt.plot(df[x], df[y], color = "tab:red")
+        plt.plot(df[x], df[f"ma{roll}"], label = df[f"ma{roll}"].name)
+        plt.plot(df[x], df[y], color = "tab:red", label = y)
         plt.gca().set(title = "Moving averages", xlabel = x, ylabel = y)
     plt.legend()
     plt.show()
 
+rollave(df = pd.read_csv("ABT.csv", parse_dates = ["Date"]), x = "Date", y = "Adj Close", roll = 30)
 
 def roll250(df, x, y):
     '''
