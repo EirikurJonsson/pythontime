@@ -30,8 +30,9 @@ def plot_df(df, x, y, title = "", xlabel = "Date", ylabel = "Value", dpi = 100):
 def rollave(df, x, y, roll, title = ""):
     '''
     This function is meant to take in either a value or a list of values
-    that will represent the moving average window. Still does not work
-    TODO. Get the lines on the same plot
+    that will represent the moving average window.
+    This function will add the rolling averages to the data frame. This
+    is, for now, is not a problem since it can be a positive going forward.
     '''
     if isinstance(roll, list):
         plt.figure(figsize = (16,5), dpi = 100)
@@ -50,7 +51,6 @@ def rollave(df, x, y, roll, title = ""):
     plt.legend()
     plt.show()
 
-rollave(df = pd.read_csv("ABT.csv", parse_dates = ["Date"]), x = "Date", y = "Adj Close", roll = 30)
 
 def roll250(df, x, y):
     '''
@@ -67,3 +67,18 @@ def roll250(df, x, y):
     plt.show()
     del ma50
     del ma200
+
+def specialyear(df, x, y, years):
+    '''
+    This function should plot a specific year.
+    TODO. Add to the function so that its possible 
+    to pass a list of years.
+    '''
+    df['year'] = [d.year for d in df["Date"]]
+    #print(df["year"].tail())
+    df2 = df.loc[df["year"] == years,:]
+    plt.plot(df2[x], df2[y])
+    plt.show()
+
+specialyear(df, "Date", "Adj Close", years = 2019)
+
