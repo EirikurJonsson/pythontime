@@ -17,6 +17,10 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
 import pandas as pd
+from mpl_finance import candlestick_ohlc
+import matplotlib.dates as mdates
+import datetime
+
 
 df = pd.read_csv("AAPL.csv", parse_dates = ["Date"])
 
@@ -80,5 +84,25 @@ def specialyear(df, x, y, years):
     plt.plot(df2[x], df2[y])
     plt.show()
 
-specialyear(df, "Date", "Adj Close", years = 2019)
+def nCandlegraph(df):
+    '''
+    This will get a specific data frame and produces a candlestick graph.
+    To make this function work you need to parse_dates for the dataframe.
+    '''
+    try:
+        df.reset_index(inplace=True)
+        df["Date"] = mdates.date2num(df["Date"].values)
+        ohlc = df[["Date","Open","High", "Low", "Close", "Volume"]].copy()
+        fig, ax = plt.subplots(figsize = (16,5))
+        candlestick_ohlc(ax, ohlc.values, width = .8, colorup = '#77d879', colordown = '#db3f3f')
+        ax.xaxis_date()
+
+        plt.show()
+    except SyntaxError:
+        print("You may need to use the parse_dates command for your data frame")
+    except AttributeError:
+        print("You may need to use the parse_dates command for your data frame")
+
+
+nCandlegraph(df = pd.read_csv("ABT.csv", parse_dates = ["Date"]))
 
