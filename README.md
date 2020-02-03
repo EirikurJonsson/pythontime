@@ -22,3 +22,9 @@ So I am creating a moving average function that is general enough that I can giv
 This function is supposed to plot a specific year. There is still some changes that need to be made, mainly that it would be possible to pass a list of years and stacking the lines. Here is a pic of the first version of this function
 
 ![Special year function](https://github.com/EirikurJonsson/pythontime/blob/master/fig3.png)
+
+### Candlestick graph
+
+This was the last and final of the visualization. Here is the candlestick graph. I added some try and except, only because of the importance of pasring the Date column. Here is an example of the candlestick.
+
+![Candlestick graph](https://github.com/EirikurJonsson/pythontime/blob/master/fig4.png)
