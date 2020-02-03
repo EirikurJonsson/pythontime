@@ -16,3 +16,9 @@ So I am creating a moving average function that is general enough that I can giv
 **Update** So I just finished it. The function can now take a list or a single value to represent a rolling average. Pic below
 
 ![Rollave fun with list](https://github.com/EirikurJonsson/pythontime/blob/master/fig2.png)
+
+### Special year function
+
+This function is supposed to plot a specific year. There is still some changes that need to be made, mainly that it would be possible to pass a list of years and stacking the lines. Here is a pic of the first version of this function
+
+![Special year function](https://github.com/EirikurJonsson/pythontime/blob/master/fig3.png)
