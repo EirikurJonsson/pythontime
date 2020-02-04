@@ -25,6 +25,9 @@ import datetime
 df = pd.read_csv("AAPL.csv", parse_dates = ["Date"])
 
 def plot_df(df, x, y, title = "", xlabel = "Date", ylabel = "Value", dpi = 100):
+    '''
+    This is a simple generic plot function that will plot a time series. 
+    '''
     plt.figure(figsize = (16,5), dpi = dpi)
     plt.plot(x,y, color = "tab:red")
     plt.gca().set(title = title, xlabel = xlabel, ylabel = ylabel)
