@@ -28,3 +28,8 @@ This function is supposed to plot a specific year. There is still some changes t
 This was the last and final of the visualization. Here is the candlestick graph. I added some try and except, only because of the importance of pasring the Date column. Here is an example of the candlestick.
 
 ![Candlestick graph](https://github.com/EirikurJonsson/pythontime/blob/master/fig4.png)
+
+
+## Forecasting
+
+I started a python script for forecasting but have found it lacking in resources. There is a book for R called Forecasting Principals and Practices (https://otexts.com/fpp2/). It does have its own R package, so I think when the first python script is ready I will move over to R for additional forecasting methods. 
