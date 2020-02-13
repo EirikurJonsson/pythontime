@@ -5,9 +5,9 @@ The code is at times an altered code I got from this
 time series guide:
 https://www.machinelearningplus.com/time-series/time-series-analysis-python/
 So good tap on the sholder to Selva Prabhakaran for posting this and allowing me to learn 
-from it. I rely hevily on this guide and this is just for my own education.
+from it. 
 
-The data will has been pulled from another source, so I wont be utilizing the data in the guide
+The data will has been pulled from another project I am still developing. 
 '''
 
 
@@ -20,6 +20,7 @@ import pandas as pd
 from mpl_finance import candlestick_ohlc
 import matplotlib.dates as mdates
 import datetime
+from statsmodels.tsa.stattools import adfuller
 
 
 df = pd.read_csv("AAPL.csv", parse_dates = ["Date"])
@@ -57,7 +58,6 @@ def rollave(df, x, y, roll, title = ""):
         plt.gca().set(title = "Moving averages", xlabel = x, ylabel = y)
     plt.legend()
     plt.show()
-
 
 def roll250(df, x, y):
     '''
@@ -106,6 +106,20 @@ def nCandlegraph(df):
     except AttributeError:
         print("You may need to use the parse_dates command for your data frame")
 
+def nReturns (df, y):
+    '''
+    This function is meant to calculate the log retruns
+    of a variable in the data frame given and add this
+    to the same data frame. This is rather simple but,
+    keeping with the theme, this will also generate a plot
+    of the returns.
+    '''
 
-nCandlegraph(df = pd.read_csv("ABT.csv", parse_dates = ["Date"]))
+    df[f"{y}_pctChange"] = df[y].pct_change()
+    df = df.dropna()
+    results = adfuller(df[f"{y}_pctChange"])
+    plt.plot(df.index, df[f"{y}_pctChange"])
+    plt.title(f"The adfuller test statistic is {round(results[0], 2)} with p value of {results[1]}")
+    plt.show()
 
+nReturns(df, "Adj Close")
